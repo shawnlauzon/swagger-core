@@ -44,7 +44,7 @@ object ApiPropertiesReader {
   def read(hostClass: Class[_]): DocumentationObject = {
     modelsCache.get(hostClass) match {
       case None => {
-        !hostClass.isEnum && !hostClass.getName.startsWith("java.lang.") match {
+        !hostClass.isEnum && !hostClass.getName.startsWith("java.lang.") && !hostClass.getName.startsWith("org.joda.") match {
           case true => {
             val docObj = schemaProvider.read(hostClass)
             modelsCache += hostClass -> docObj
